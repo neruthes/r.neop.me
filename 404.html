@@ -7,12 +7,12 @@
     <body>
         <script type="text/javascript">
         (function () {
-            var h = location.pathname.slice(1);
+            window.h = location.pathname.slice(1);
             if (h === '') {
                 // No path
                 location.href = 'https://github.com/neruthes/r.neop.me';
             } else {
-                var xhr = new XMLHttpRequest();
+                window.xhr = new XMLHttpRequest();
                 xhr.open('get', '/db/' + h + '.txt');
                 xhr.send();
                 xhr.onload = function () {
