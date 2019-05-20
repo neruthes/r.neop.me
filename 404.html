@@ -16,7 +16,13 @@
                 xhr.open('get', '/db/' + h + '.txt');
                 xhr.send();
                 xhr.onload = function () {
-                    location.href = xhr.responseText.trim();
+                    if (xhr.status === 200 && xhr.status === 304) {
+                        // Exists
+                        location.href = xhr.responseText.trim();
+                    } else {
+                        // 404
+                        document.write(`No such short link yet.`);
+                    };
                 };
             };
         })()
