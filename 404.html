@@ -16,10 +16,10 @@
                 xhr.open('get', '/db/' + h + '.txt');
                 xhr.send();
                 xhr.onload = function (e) {
-                    console.log(e);
-                    if (e.status === 200 && e.status === 304) {
+                    console.log(xhr);
+                    if (xhr.status === 200 || xhr.status === 304) {
                         // Exists
-                        location.href = e.responseText.trim();
+                        location.href = xhr.responseText.trim();
                     } else {
                         // 404
                         document.write(`No such short link yet.`);
