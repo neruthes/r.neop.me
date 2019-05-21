@@ -21,6 +21,6 @@ if (argv.length !== 3) {
 
     // Log
     console.log('Successful!');
-    console.log(`Now /${currentId_base36}`);
+    console.log(`Now https://udon.pw/${currentId_base36}`);
     console.log(`Will be redirected to ${url}`);
 };
