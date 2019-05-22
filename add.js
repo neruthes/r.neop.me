@@ -1,3 +1,4 @@
+const exec = require('child_process').exec;
 const fs = require('fs');
 
 var argv = process.argv;
@@ -23,4 +24,7 @@ if (argv.length !== 3) {
     console.log('Successful!');
     console.log(`Now https://udon.pw/${currentId_base36}`);
     console.log(`Will be redirected to ${url}`);
+
+    // Auto push
+    exec('sh publish.sh');
 };
