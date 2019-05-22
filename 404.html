@@ -3,8 +3,32 @@
     <head>
         <meta charset="utf-8">
         <title>Redirecting...</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <style media="screen">
+        html, body {
+            font-family: 'Source Code Pro', 'Menlo', monospace;
+            font-size: 16px;
+        }
+        body {
+            text-align: center;
+            padding: 30px;
+            margin: 0;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5em;
+        }
+        </style>
     </head>
     <body>
+        <div id="notice-for-404" style="display: none;">
+            <h1>UDON.PW</h1>
+            <h2>404 NOT FOUND</h2>
+            <div style="background: #AAA; width: 50%; max-width: 360px; height: 1px; margin: 40px auto;">
+            </div>
+            <p>No such short link yet.</p>
+            <p>This short URL service is powered by <a href="https://github.com/neruthes/udon.pw">the free software</a> authored by <a href="https://neruthes.xyz/">Neruthes</a>, licensed under AGPL 3.0.</p>
+        </div>
         <script type="text/javascript">
         (function () {
             window.h = location.pathname.slice(1);
@@ -22,7 +46,8 @@
                         location.href = xhr.responseText.trim();
                     } else {
                         // 404
-                        document.write(`No such short link yet. [01<!-- 0 -->]`);
+                        // document.write(`No such short link yet. [01]`);
+                        document.querySelector('#notice-for-404').style.display = 'block';
                     };
                 };
             };
