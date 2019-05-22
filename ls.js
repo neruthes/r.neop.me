@@ -21,6 +21,10 @@ const listOfUrls = (new Array(latestId + 1)).fill(1).map((x,i)=>{
     return fs.readFileSync(`db/${i.toString(36)}.txt`).toString().trim();
 });
 
-console.log(listOfUrls.map((x,i)=>{
+const finalExportList = listOfUrls.map((x,i)=>{
     return `https://udon.pw/${rightPad(i.toString(36), 8)} ${x}`;
-}).join('\n'));
+}).join('\n');
+
+fs.writeFileSync('cachelist.txt', finalExportList);
+
+console.log(finalExportList);
