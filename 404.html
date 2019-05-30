@@ -44,7 +44,7 @@
                     console.log(xhr);
                     if (xhr.status === 200 || xhr.status === 304) {
                         // Exists
-                        location.href = (locatoin.hash === '') ? xhr.responseText.trim() : CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
+                        location.href = (location.hash === '') ? xhr.responseText.trim() : CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
                     } else {
                         // 404
                         // document.write(`No such short link yet. [01]`);
