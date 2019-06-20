@@ -1,3 +1,5 @@
+const myDomainName = 'udon.pw';
+
 const exec = require('child_process').exec;
 const crypto = require('crypto');
 const CryptoJS = require('crypto-js');
@@ -32,7 +34,7 @@ if (argv.length < 3 || argv.length > 4) {
 
     // Log
     console.log('Successful!');
-    console.log(`Now https://udon.pw/${currentId_base36}${aeskey ? '#' + aeskey : ''}`);
+    console.log(`Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}`);
     console.log(`Will be redirected to ${url}`);
 
     // Auto push

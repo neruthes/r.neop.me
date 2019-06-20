@@ -1,6 +1,26 @@
 # Simple Static Short Links
 
-## Adding
+## Adding Link
+
+### General
+
+```
+$ node add.js https://example.com
+```
+
+### Adding Encrypted Link
+
+```
+$ node add.js https://example.com password_here
+```
+
+The domain name is configurable at `add.js` line 1.
+
+## Publishing
+
+Deploying on [GitHub Pages](https://pages.github.com) is easy.
+
+Run 'node ls.js' to generate `cachelist.txt`.
 
 ## Copyright
 
