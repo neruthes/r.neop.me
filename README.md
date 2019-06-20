@@ -20,7 +20,7 @@ The domain name is configurable at `add.js` line 1.
 
 Deploying on [GitHub Pages](https://pages.github.com) is easy.
 
-Run 'node ls.js' to generate `cachelist.txt`.
+Run `node ls.js` to generate `cachelist.txt`.
 
 ## Copyright
 
