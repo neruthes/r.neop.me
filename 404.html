@@ -47,7 +47,7 @@
                     console.log(xhr);
                     if (xhr.status === 200 || xhr.status === 304) {
                         // Exists
-                        if (h[0] === '@') {
+                        if (location.pathname[1] === '@') {
                             // Meta
                             document.querySelector('#message-content').innerHTML = xhr.responseText.trim();
                             document.querySelector('#notice-area').style.display = 'block';
