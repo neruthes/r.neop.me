@@ -24,7 +24,7 @@
     <body>
         <div id="notice-area" style="display: none;">
             <h1>UDON.PW</h1>
-            <h2>404 NOT FOUND</h2>
+            <h2>Special Message Page</h2>
             <div style="background: #AAA; width: 50%; max-width: 360px; height: 1px; margin: 40px auto;">
             </div>
             <p id="message-content">No such short link yet.</p>
@@ -49,13 +49,22 @@
                         // Exists
                         if (location.pathname[1] === '@') {
                             // Meta
+                            document.querySelector('h2').innerHTML = 'Link Metadata';
                             document.querySelector('#message-content').innerHTML = xhr.responseText.trim();
                             document.querySelector('#notice-area').style.display = 'block';
                         } else {
                             // Redirect
                             if (location.hash === '') {
-                                // Transparent
-                                location.href = xhr.responseText.trim();
+                                // Transparent?
+                                if (xhr.responseText.trim().indexOf('http') === 0) {
+                                    // Transparent
+                                    location.href = xhr.responseText.trim();
+                                } else {
+                                    // Encrypted without correct password.
+                                    document.querySelector('h2').innerHTML = 'Bad Password';
+                                    document.querySelector('#message-content').innerHTML = 'You need the right password to follow this link.'
+                                    document.querySelector('#notice-area').style.display = 'block';
+                                }
                             } else {
                                 // Encrypted
                                 location.href = CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
@@ -63,6 +72,7 @@
                         }
                     } else {
                         // 404
+                        document.querySelector('h2').innerHTML = '404 Not Found';
                         document.querySelector('#notice-area').style.display = 'block';
                     };
                 };
