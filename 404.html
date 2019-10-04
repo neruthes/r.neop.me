@@ -47,7 +47,6 @@
                     console.log(xhr);
                     if (xhr.status === 200 || xhr.status === 304) {
                         // Exists
-                        location.href = (location.hash === '') ?  : ;
                         if (h[0] === '@') {
                             // Meta
                             document.querySelector('#message-content').innerHTML = xhr.responseText.trim();
