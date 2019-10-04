@@ -38,9 +38,6 @@
             <p>This short URL service is powered by <a href="https://github.com/neruthes/udon.pw">the free software</a> authored by <a href="https://neruthes.xyz/">Neruthes</a>, licensed under AGPL 3.0.</p>
         </div>
         <script type="text/javascript">
-        var getUrlRaw = function (h) {
-
-        };
         (function () {
             window.h = location.pathname.slice(1).replace('@', '');
             if (h === '') {
@@ -51,11 +48,11 @@
                 xhr.open('get', '/db/' + h + '.txt');
                 xhr.send();
                 xhr.onload = function (e) {
-                    console.log(xhr);
                     if (xhr.status === 200 || xhr.status === 304) {
                         // Exists
                         if (location.pathname[1] === '@') {
                             // Meta
+                            document.title = 'UDON.PW - Link Metadata';
                             document.querySelector('h2').innerHTML = 'Link Metadata';
                             document.querySelector('#message-content').innerHTML = `<code>${xhr.responseText.trim()}</code>`;
                             document.querySelector('#notice-area').style.display = 'block';
@@ -65,10 +62,12 @@
                                 // Transparent?
                                 if (xhr.responseText.trim().indexOf('http') === 0) {
                                     // Transparent
+                                    document.title = 'Redirecting...';
                                     location.href = xhr.responseText.trim();
                                 } else {
                                     // Encrypted without correct password.
-                                    document.querySelector('h2').innerHTML = 'Bad Password';
+                                    document.title = 'UDON.PW - 403 Bad Password';
+                                    document.querySelector('h2').innerHTML = '403 Bad Password';
                                     document.querySelector('#message-content').innerHTML = 'You need the right password to follow this link.'
                                     document.querySelector('#notice-area').style.display = 'block';
                                 }
@@ -79,6 +78,7 @@
                         }
                     } else {
                         // 404
+                        document.title = 'UDON.PW - 404 Not Found';
                         document.querySelector('h2').innerHTML = '404 Not Found';
                         document.querySelector('#notice-area').style.display = 'block';
                     };
