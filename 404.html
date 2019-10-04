@@ -27,10 +27,13 @@
             <h2>404 NOT FOUND</h2>
             <div style="background: #AAA; width: 50%; max-width: 360px; height: 1px; margin: 40px auto;">
             </div>
-            <p>No such short link yet.</p>
+            <p id="message-content">No such short link yet.</p>
             <p>This short URL service is powered by <a href="https://github.com/neruthes/udon.pw">the free software</a> authored by <a href="https://neruthes.xyz/">Neruthes</a>, licensed under AGPL 3.0.</p>
         </div>
         <script type="text/javascript">
+        var getUrlRaw = function (h) {
+
+        };
         (function () {
             window.h = location.pathname.slice(1);
             if (h === '') {
@@ -44,7 +47,20 @@
                     console.log(xhr);
                     if (xhr.status === 200 || xhr.status === 304) {
                         // Exists
-                        location.href = (location.hash === '') ? xhr.responseText.trim() : CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
+                        location.href = (location.hash === '') ?  : ;
+                        if (h[0] === '@') {
+                            // Meta
+                            document.querySelector('#message-content').innerHTML = xhr.responseText.trim();
+                        } else {
+                            // Redirect
+                            if (location.hash === '') {
+                                // Transparent
+                                location.href = xhr.responseText.trim();
+                            } else {
+                                // Encrypted
+                                location.href = CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
+                            }
+                        }
                     } else {
                         // 404
                         // document.write(`No such short link yet. [01]`);
