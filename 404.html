@@ -22,7 +22,7 @@
         </style>
     </head>
     <body>
-        <div id="notice-for-404" style="display: none;">
+        <div id="notice-area" style="display: none;">
             <h1>UDON.PW</h1>
             <h2>404 NOT FOUND</h2>
             <div style="background: #AAA; width: 50%; max-width: 360px; height: 1px; margin: 40px auto;">
@@ -35,7 +35,7 @@
 
         };
         (function () {
-            window.h = location.pathname.slice(1);
+            window.h = location.pathname.slice(1).replace('@', '');
             if (h === '') {
                 // No path
                 location.href = 'https://github.com/neruthes/udon.pw';
@@ -51,6 +51,7 @@
                         if (h[0] === '@') {
                             // Meta
                             document.querySelector('#message-content').innerHTML = xhr.responseText.trim();
+                            document.querySelector('#notice-area').style.display = 'block';
                         } else {
                             // Redirect
                             if (location.hash === '') {
@@ -63,8 +64,7 @@
                         }
                     } else {
                         // 404
-                        // document.write(`No such short link yet. [01]`);
-                        document.querySelector('#notice-for-404').style.display = 'block';
+                        document.querySelector('#notice-area').style.display = 'block';
                     };
                 };
             };
