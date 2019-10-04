@@ -19,6 +19,11 @@
             font-size: 16px;
             line-height: 1.5em;
         }
+        code {
+            background: #EEE;
+            border: 1px solid #E0E0E0;
+            border-radius: 3px;
+        }
         </style>
     </head>
     <body>
@@ -50,7 +55,7 @@
                         if (location.pathname[1] === '@') {
                             // Meta
                             document.querySelector('h2').innerHTML = 'Link Metadata';
-                            document.querySelector('#message-content').innerHTML = xhr.responseText.trim();
+                            document.querySelector('#message-content').innerHTML = `<code>${xhr.responseText.trim()}</code>`;
                             document.querySelector('#notice-area').style.display = 'block';
                         } else {
                             // Redirect
