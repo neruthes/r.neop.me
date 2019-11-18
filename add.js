@@ -35,10 +35,9 @@ if (argv.length < 3 || argv.length > 4) {
     fs.writeFileSync(`latest-id.txt`, currentId_base36);
 
     // Log
-    var logTextLine = `Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}`;
     console.log('Successful!');
+    var logTextLine = `Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}\nWill be redirected to ${url}`;
     console.log(logTextLine);
-    console.log(`Will be redirected to ${url}`);
     exec(`echo "${logTextLine}\n" >> ~/.neruthes-apps/udonpw-shortlinks/logs.txt;`);
 
     // Auto push
