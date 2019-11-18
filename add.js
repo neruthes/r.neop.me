@@ -5,6 +5,8 @@ const crypto = require('crypto');
 const CryptoJS = require('crypto-js');
 const fs = require('fs');
 
+exec('mkdir ~/.neruthes-apps; mkdir ~/.neruthes-apps/udonpw-shortlinks; touch mkdir ~/.neruthes-apps/udonpw-shortlinks/logs.txt;');
+
 var argv = process.argv;
 
 if (argv.length < 3 || argv.length > 4) {
@@ -33,9 +35,11 @@ if (argv.length < 3 || argv.length > 4) {
     fs.writeFileSync(`latest-id.txt`, currentId_base36);
 
     // Log
+    var logTextLine = `Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}`;
     console.log('Successful!');
-    console.log(`Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}`);
+    console.log(logTextLine);
     console.log(`Will be redirected to ${url}`);
+    exec(`echo "${logTextLine}\n" >> ~/.neruthes-apps/udonpw-shortlinks/logs.txt;`);
 
     // Auto push
     exec('sh publish.sh');
