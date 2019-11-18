@@ -12,9 +12,10 @@ var argv = process.argv;
 if (argv.length < 3 || argv.length > 4) {
     console.error('Please give 1 and only 1 URL.');
 } else {
-    var url = argv[2];
-    if (url.indexOf('://') === -1) {
-        url = 'https://' + url;
+    var rawUrl = argv[2];
+    var url = rawUrl;
+    if (rawUrl.indexOf('://') === -1) {
+        url = 'https://' + rawUrl;
     };
     if (argv[3] !== undefined) {
         // Given AES key
@@ -36,7 +37,7 @@ if (argv.length < 3 || argv.length > 4) {
 
     // Log
     console.log('Successful!');
-    var logTextLine = `Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}\nWill be redirected to ${url}`;
+    var logTextLine = `Now https://${myDomainName}/${currentId_base36}${aeskey ? '#' + aeskey : ''}\nWill be redirected to ${rawUrl}`;
     console.log(logTextLine);
     exec(`echo "${logTextLine}\n" >> ~/.neruthes-apps/udonpw-shortlinks/logs.txt;`);
 
