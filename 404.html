@@ -7,7 +7,7 @@
         <script type="text/javascript" src="/bower_components/crypto-js/crypto-js.js"></script>
         <style media="screen">
         html, body {
-            font-family: -apple-system, 'Helvetica Neue', 'Source Code Pro', 'Menlo', monospace;
+            font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', 'Helvetica', 'Source Code Pro', 'Menlo', monospace;
             font-size: 16px;
         }
         body {
@@ -32,7 +32,7 @@
         <div id="notice-area" style="display: none;">
             <h1>UDON.PW</h1>
             <h2>Special Message Page</h2>
-            <div style="background: #AAA; width: 50%; max-width: 360px; height: 1px; margin: 40px auto;">
+            <div style="background: #AAA; width: 50%; max-width: 360px; height: 1px; margin: 40px auto;" class="separation-line">
             </div>
             <p id="message-content">No such short link yet.</p>
             <p>This short URL service is powered by <a href="https://github.com/neruthes/udon.pw">the free software</a> authored by <a href="https://neruthes.xyz/">Neruthes</a>, licensed under AGPL 3.0.</p>
@@ -40,6 +40,12 @@
         <script type="text/javascript">
         (function () {
             window.h = location.pathname.slice(1).replace('@', '');
+            var error403 = function () {
+                document.title = 'UDON.PW - 403 Bad Password';
+                document.querySelector('h2').innerHTML = '403 Bad Password';
+                document.querySelector('#message-content').innerHTML = 'You need the right password to follow this link.'
+                document.querySelector('#notice-area').style.display = 'block';
+            };
             if (h === '') {
                 // No path
                 location.href = 'https://github.com/neruthes/udon.pw';
@@ -66,14 +72,15 @@
                                     location.href = xhr.responseText.trim();
                                 } else {
                                     // Encrypted without correct password.
-                                    document.title = 'UDON.PW - 403 Bad Password';
-                                    document.querySelector('h2').innerHTML = '403 Bad Password';
-                                    document.querySelector('#message-content').innerHTML = 'You need the right password to follow this link.'
-                                    document.querySelector('#notice-area').style.display = 'block';
+                                    error403();
                                 }
                             } else {
                                 // Encrypted
-                                location.href = CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
+                                try {
+                                    location.href = CryptoJS.AES.decrypt(xhr.responseText.trim(), location.hash.slice(1)).toString(CryptoJS.enc.Utf8);
+                                } catch (e) {
+                                    error403();
+                                }
                             }
                         }
                     } else {
